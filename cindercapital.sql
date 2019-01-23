@@ -21,7 +21,7 @@
 
 DROP TABLE IF EXISTS `opinions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `opinions` (
   `uniqueID` varchar(100) DEFAULT NULL,
   `userName` varchar(100) DEFAULT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE `opinions` (
   `date` datetime DEFAULT NULL,
   `month` varchar(100) DEFAULT NULL,
   `posted` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `opinions` (
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+ SET character_set_client = utf8 ;
 CREATE TABLE `users` (
   `firstName` varchar(100) DEFAULT NULL,
   `lastName` varchar(100) DEFAULT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE `users` (
   `passWord` varchar(100) DEFAULT NULL,
   `email` varchar(100) DEFAULT NULL,
   `admin` tinyint(1) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
