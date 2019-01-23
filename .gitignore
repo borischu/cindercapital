@@ -1,2 +1,4 @@
 vendor/
 .env
+connectDB.php
+cindercapital.sql

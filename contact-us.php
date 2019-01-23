@@ -65,7 +65,7 @@
                                         <label class="control-label sr-only"></label>
                                         <textarea class="form-control" id="textarea" name="message" rows="4" placeholder="MESSAGE" required></textarea>
                                     </div>
-                                    <button type="submit" name="email" class="btn btn-default btn-block ">Submit</button>
+                                    <button type="submit" name="emailSubmit" class="btn btn-default btn-block ">Submit</button>
                                 </div>
                                 <!-- /.form-section -->
                             </div>
@@ -76,7 +76,7 @@
         </div>
     </div>
     <?php
-        if(isset($_POST['email'])) {
+        if(isset($_POST['emailSubmit'])) {
  
             $email_to = "cindercapital@gmail.com";
          
@@ -100,7 +100,7 @@
             $message = $_POST['message']; // required
 
             $error_message = "";
-            $email_exp = '/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/';
+            $email_exp = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
 
             if(!preg_match($email_exp,$email)) {
                 $error_message .= 'The email address you entered does not appear to be valid.\n';
