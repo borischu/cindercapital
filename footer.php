@@ -80,5 +80,10 @@
     <script type="text/javascript" src="js/sticky-header.js"></script>
     <script type="text/javascript" src="js/owl.carousel.min.js"></script>
     <script type="text/javascript" src="js/multiple-carousel.js"></script>
+    <script>
+        document.querySelectorAll( 'oembed[url]' ).forEach( element => {
+            iframely.load( element, element.attributes.url.value );
+        } );
+    </script>
 FOOTER;
 ?>

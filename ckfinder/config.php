@@ -39,7 +39,7 @@ $config['licenseKey']  = '';
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_privateDir
 
 $config['privateDir'] = array(
-    'backend' => 'cindercapital',
+    'backend' => 'awss3',
     'tags'   => '.ckfinder/tags',
     'logs'   => '.ckfinder/logs',
     'cache'  => '.ckfinder/cache',
@@ -64,14 +64,13 @@ $config['images'] = array(
 // https://ckeditor.com/docs/ckfinder/ckfinder3-php/configuration.html#configuration_options_backends
 
  $config['backends'][] = array(
-     'name'               => 'cindercapital',
-     'adapter'            => 'local',
-     'baseUrl'            => '/ckfinder/userfiles/',
-     // 'root'               => '/var/www/ckfinder/userfiles/',
-     'chmodFiles'         => 0755,
-     'chmodFolders'       => 0755,
-     'filesystemEncoding' => 'UTF-8',
-     'followSymlinks'     => true
+     'name'               => 'awss3',
+     'adapter'            => 's3',
+     'bucket'             => 'cindercapital',
+     'region'             => 'us-west-2',
+     'key'                => getenv('cindercapitals3key'),
+     'secret'             => getenv('cindercapitals3secret'),
+     'baseUrl'            => 'https://s3-us-west-2.amazonaws.com/cindercapital/'
  );
 
 /*================================ Resource Types =====================================*/
@@ -84,7 +83,7 @@ $config['resourceTypes'][] = array(
     'directory'         => 'files',
     'allowedExtensions' => '7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,zip',
     'deniedExtensions'  => '',
-    'backend'           => 'cindercapital'
+    'backend'           => 'awss3'
 );
 
 $config['resourceTypes'][] = array(
@@ -92,7 +91,7 @@ $config['resourceTypes'][] = array(
     'directory'         => 'images',
     'allowedExtensions' => 'bmp,gif,jpeg,jpg,png',
     'deniedExtensions'  => '',
-    'backend'           => 'cindercapital'
+    'backend'           => 'awss3'
 );
 
 /*================================ Access Control =====================================*/

@@ -38,4 +38,5 @@
 	        gtag('config', 'UA-106639251-1');
 	    </script>
 HEADER;
+    	print "<script charset=\"utf-8\" src=\"https://cdn.iframe.ly/embed.js?api_key=".getenv('iframelykey')."\"></script>";
 ?>

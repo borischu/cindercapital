@@ -58,7 +58,7 @@ TOP;
                                 print "<span class=\"meta-date\">".$row[8]." ".$row[7].", ".$row[9]."</span>";
                                 print "<span class=\"meta-comments\"><a href=\"sector.php?sector=".$row[4]."\" class=\"meta-link\">".$row[4]."</a></span></div>";
                                 print "<h2 class=\"mb20\"><a href=\"opinion.php?id=".$row[0]."\" class=\"title\">".$row[3]."</a></h2>";
-                                print "<p>".(substr($row[5], 0, 500))."</p>";
+                                print "<p>".(substr($row[5], 0, 200))."</p>";
                                 print "     <div class=\"post-btn\">
                                                 <a href=\"opinion.php?id=".$row[0]."\" class=\"btn btn-default\">read more</a>
                                             </div>
@@ -97,7 +97,7 @@ TOP;
                                             if ($count > $page) {
                                                 print "<li><a href=\"?page=".($page+1)."\" aria-label=\"Next\"><span aria-hidden=\"true\">Next</span></a></li>";   
                                             }
-                                        } else if ($pages *3 <= $rows && $pages * 3 >= $rows - 3) { // last page
+                                        } else if ($pages * 3 <= $rows && $pages * 3 >= $rows - 3) { // last page
                                             print "<li><a href=\"?page=".($page-1)."\" aria-label=\"Previous\"><span aria-hidden=\"true\">Previous</span></a></li>";
                                             $count = $page;
                                             for ($x=1; $x<=$rows; $x+=3) {
