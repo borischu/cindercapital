@@ -58,7 +58,7 @@ TOP;
                                 print "<span class=\"meta-date\">".$row[8]." ".$row[7].", ".$row[9]."</span>";
                                 print "<span class=\"meta-comments\"><a href=\"sector.php?sector=".$row[4]."\" class=\"meta-link\">".$row[4]."</a></span></div>";
                                 print "<h2 class=\"mb20\"><a href=\"opinion.php?id=".$row[0]."\" class=\"title\">".$row[3]."</a></h2>";
-                                print "<p>".(substr($row[5], 0, 200))."</p>";
+                                print "<p>".(substr($row[5], 0, 240))."</p>";
                                 print "     <div class=\"post-btn\">
                                                 <a href=\"opinion.php?id=".$row[0]."\" class=\"btn btn-default\">read more</a>
                                             </div>
