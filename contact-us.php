@@ -94,6 +94,7 @@
                 !isset($_POST['message'])) {
                 died('We are sorry, but there appears to be a problem with the form you submitted.');       
             } 
+            $curl = curl_init();
             $name = $_POST['name']; // required
             $email = $_POST['email']; // required
             $subject = $_POST['subject']; // required
@@ -133,17 +134,36 @@
                 return str_replace($bad,"",$string);
             }
 
-             
-
             $email_message .= "Name: ".clean_string($name)."\n";
             $email_message .= "Email: ".clean_string($email)."\n";
             $email_message .= "Subject: ".clean_string($subject)."\n";
             $email_message .= "Message: ".clean_string($message)."\n";
+             
+            curl_setopt_array($curl, array(
+              CURLOPT_URL => "https://api.sendgrid.com/v3/mail/send",
+              CURLOPT_RETURNTRANSFER => true,
+              CURLOPT_ENCODING => "",
+              CURLOPT_MAXREDIRS => 10,
+              CURLOPT_TIMEOUT => 30,
+              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+              CURLOPT_CUSTOMREQUEST => "POST",
+              CURLOPT_POSTFIELDS => $email_message,
+              CURLOPT_HTTPHEADER => array(
+                "authorization: Bearer ".getenv('SENDGRID_API_KEY'),
+                "cache-control: no-cache",
+                "content-type: application/json"
+              ),
+            ));
 
-            $headers = 'From: '.$email."\r\n".
-            'Reply-To: '.$email."\r\n" .
-            'X-Mailer: PHP/' . phpversion();
-            mail($email_to, $subject, $email_message, $headers);  
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
+            if ($err) {
+              echo "cURL Error #:" . $err;
+            } else {
+              echo $response;
+            }
+
     ?>
     <script>
         alert('Thank you contacting us!');

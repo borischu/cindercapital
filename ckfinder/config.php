@@ -68,8 +68,8 @@ $config['images'] = array(
      'adapter'            => 's3',
      'bucket'             => 'cindercapital',
      'region'             => 'us-west-2',
-     'key'                => getenv('cindercapitals3key'),
-     'secret'             => getenv('cindercapitals3secret'),
+     'key'                => getenv('CINDERCAPITAL_S3_KEY'),
+     'secret'             => getenv('CINDERCAPITAL_S3_SECRET'),
      'baseUrl'            => 'https://s3-us-west-2.amazonaws.com/cindercapital/'
  );
 
