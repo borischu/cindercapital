@@ -123,7 +123,7 @@
             $email->setFrom($email_from, $name);
             $email->setSubject($subject);
             $email->addTo($email_to, "Cinder Capital, LLC.");
-            $email->addContent("text/plain", $message);
+            $email->addContent("text/plain", $message."\n\n\nThis message was from cindercapital.com");
             $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
             try {
                 $response = $sendgrid->send($email);
