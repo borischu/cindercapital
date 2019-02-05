@@ -79,7 +79,7 @@
         require 'vendor/autoload.php';
         if(isset($_POST['emailSubmit'])) {
  
-            $email_from = "cindercapital@gmail.com";
+            $email_from = "app122762013@heroku.com";
          
             function died($error) {
                 include 'footer.php';
@@ -97,14 +97,14 @@
             } 
 
             $name = $_POST['name']; // required
-            $email = $_POST['email']; // required
+            $email_to = $_POST['email']; // required
             $subject = $_POST['subject']; // required
             $message = $_POST['message']; // required
 
             $error_message = "";
             $email_exp = '/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
 
-            if(!preg_match($email_exp,$email)) {
+            if(!preg_match($email_exp,$email_to)) {
                 $error_message .= 'The email address you entered does not appear to be valid.\n';
             }
 
@@ -122,7 +122,7 @@
             $email = new \SendGrid\Mail\Mail();
             $email->setFrom($email_from, "Cinder Capital, LLC.");
             $email->setSubject($subject);
-            $email->addTo($email, $name);
+            $email->addTo($email_to, $name);
             $email->addContent("text/plain", $message);
             $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
             try {
