@@ -76,9 +76,10 @@
         </div>
     </div>
     <?php
+        require 'vendor/autoload.php';
         if(isset($_POST['emailSubmit'])) {
  
-            $email_to = "cindercapital@gmail.com";
+            $email_from = "cindercapital@gmail.com";
          
             function died($error) {
                 include 'footer.php';
@@ -94,7 +95,7 @@
                 !isset($_POST['message'])) {
                 died('We are sorry, but there appears to be a problem with the form you submitted.');       
             } 
-            $curl = curl_init();
+
             $name = $_POST['name']; // required
             $email = $_POST['email']; // required
             $subject = $_POST['subject']; // required
@@ -109,14 +110,6 @@
 
             $string_exp = "/^[A-Za-z .'-]+$/";
 
-            if(!preg_match($string_exp,$name)) {
-                $error_message .= 'The name you entered does not appear to be valid.\n';
-            }
-
-            if(!preg_match($string_exp,$subject)) {
-                $error_message .= 'The subject you entered does not appear to be valid.\n';
-            }
-
             if(strlen($message) < 2) {
                 $error_message .= 'The message you entered do not appear to be valid.\n';
             }
@@ -126,52 +119,25 @@
                 died($error_message);
             }
 
-            $email_message = "Form details below.\n\n";
-
-
-            function clean_string($string) {
-                $bad = array("content-type","bcc:","to:","cc:","href");
-                return str_replace($bad,"",$string);
+            $email = new \SendGrid\Mail\Mail();
+            $email->setFrom($email_from, "Cinder Capital, LLC.");
+            $email->setSubject($subject);
+            $email->addTo($email, $name);
+            $email->addContent("text/plain", $message);
+            $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+            try {
+                $response = $sendgrid->send($email);
+                echo "<script>";
+                echo "alert('Thank you contacting us!');";
+                echo "</script>";
+            } catch (Exception $e) {
+                echo "<script>";
+                echo 'Caught exception: ',  $e->getMessage(), "\n";
+                echo "</script>";
             }
-
-            $email_message .= "Name: ".clean_string($name)."\n";
-            $email_message .= "Email: ".clean_string($email)."\n";
-            $email_message .= "Subject: ".clean_string($subject)."\n";
-            $email_message .= "Message: ".clean_string($message)."\n";
-             
-            curl_setopt_array($curl, array(
-              CURLOPT_URL => "https://api.sendgrid.com/v3/mail/send",
-              CURLOPT_RETURNTRANSFER => true,
-              CURLOPT_ENCODING => "",
-              CURLOPT_MAXREDIRS => 10,
-              CURLOPT_TIMEOUT => 30,
-              CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-              CURLOPT_CUSTOMREQUEST => "POST",
-              CURLOPT_POSTFIELDS => $email_message,
-              CURLOPT_HTTPHEADER => array(
-                "authorization: Bearer ".getenv('SENDGRID_API_KEY'),
-                "cache-control: no-cache",
-                "content-type: application/json"
-              ),
-            ));
-
-            $response = curl_exec($curl);
-            $err = curl_error($curl);
-            curl_close($curl);
-            if ($err) {
-              echo "cURL Error #:" . $err;
-            } else {
-              echo $response;
-            }
-
+        }
     ?>
-    <script>
-        alert('Thank you contacting us!');
-    </script>
-    <?php
 
-    }
-    ?>
     <!-- footer -->
     <?php include 'footer.php';?>
     <!-- /.footer -->
