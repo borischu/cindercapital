@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 nopr">
                                     <div class="form-group">
-                                        <button type="submit" name="submit" class="btn btn-primary btn-block ">Submit</button>
+                                        <button type="submit" name="submit" class="btn btn-primary btn-block ">Post</button>
                                     </div>
                                 </div>
                                     <script type="text/javascript">

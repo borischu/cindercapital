@@ -58,7 +58,7 @@ TOP;
                                 print "<span class=\"meta-date\">".$row[8]." ".$row[7].", ".$row[9]."</span>";
                                 print "<span class=\"meta-comments\"><a href=\"sector.php?sector=".$row[4]."\" class=\"meta-link\">".$row[4]."</a></span></div>";
                                 print "<h2 class=\"mb20\"><a href=\"opinion.php?id=".$row[0]."\" class=\"title\">".$row[3]."</a></h2>";
-                                print "<p>".(substr($row[5], 0, 240))."</p>";
+                                print substr($row[5], 0, 240);
                                 print "     <div class=\"post-btn\">
                                                 <a href=\"opinion.php?id=".$row[0]."\" class=\"btn btn-default\">read more</a>
                                             </div>
@@ -94,7 +94,7 @@ TOP;
                                                     }
                                                 }
                                             }
-                                            if ($count > $page) {
+                                            if ($count > $page+1) {
                                                 print "<li><a href=\"?page=".($page+1)."\" aria-label=\"Next\"><span aria-hidden=\"true\">Next</span></a></li>";   
                                             }
                                         } else if ($pages * 3 <= $rows && $pages * 3 >= $rows - 3) { // last page
@@ -104,9 +104,14 @@ TOP;
                                                 if ($x % 3 == 1) {
                                                     if ($count <= $page+1) {
                                                         if ($count == $page) {
-                                                            print "<li><a href=\"?page=".($count-2)."\">".($count-2)."</a></li>";
-                                                            print "<li><a href=\"?page=".($count-1)."\">".($count-1)."</a></li>";
-                                                            print "<li class=\"active\"><a href=\"#\">".$count."</a></li>";
+                                                            if ($page == 2) {
+                                                                print "<li><a href=\"?page=".($count-1)."\">".($count-1)."</a></li>";
+                                                                print "<li class=\"active\"><a href=\"#\">".$count."</a></li>";
+                                                            } else {
+                                                                print "<li><a href=\"?page=".($count-2)."\">".($count-2)."</a></li>";
+                                                                print "<li><a href=\"?page=".($count-1)."\">".($count-1)."</a></li>";
+                                                                print "<li class=\"active\"><a href=\"#\">".$count."</a></li>";
+                                                            }
                                                         } else {
                                                             print "<li><a href=\"?page=".$count."\">".$count."</a></li>";
                                                         }
@@ -147,10 +152,10 @@ TOP;
                 </div>
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     <!-- widget-search -->
-                    <div class=" widget widget-search">
+<!--                     <div class=" widget widget-search">
                         <form>
                             <div class="search-form autocomplete">
-                                <input type="text" class="form-control" placeholder="SEARCH HERE" list="opinionsList" onchange="window.location.href='opinion.php?id=' + this.id;">
+                                <input type="text" class="form-control" placeholder="SEARCH HERE" list="opinionsList" onchange="searchPosts()">
                                 <datalist id="opinionsList">
                                     <?php
                                         $qry = "SELECT title, uniqueID FROM opinions ORDER BY date DESC";
@@ -159,13 +164,13 @@ TOP;
                                         while ($row = $result->fetch_row()) {
                                             $opinionsList = $opinionsList."<option id=\"".$row[1]."\" value=\"".$row[0]."\"></option>";
                                         }
-                                        print($opinionsList)
+                                        print ($opinionsList);
                                     ?>
                                 </datalist>
                                 <button type="Submit"><i class="fa fa-search"></i></button>
                             </div>
                         </form>
-                    </div>
+                    </div> -->
                     <!-- /.widget-search -->
                     <!-- widget-categories -->
                     <div class=" widget widget-categories">
