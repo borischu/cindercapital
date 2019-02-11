@@ -1,7 +1,1 @@
 ErrorDocument 404 http://cindercapital.com/error.php
-
-RewriteEngine On
-
-RewriteCond %{HTTP_HOST} ^www.cindercapital.com [NC]
-
-RewriteRule ^(.*)$ http://cindercapital.com/$1 [L,R=301]
