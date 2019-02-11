@@ -51,7 +51,7 @@
                     <div class="ft-social">
                         <span><a href="https://twitter.com/CinderCapital" target="_blank" class="btn-social btn-twitter"><i class="fa fa-twitter"></i></a></span>
                         <span><a href="mailto:cindercapital@gmail.com" target="_blank" class="btn-social btn-googleplus"><i class="fa fa-google-plus"></i></a></span>
-                        <span><a href="https://www.linkedin.com/company-beta/25068816" target="_blank" class=" btn-social btn-linkedin"><i class="fa fa-linkedin"></i></a></span>
+                        <span><a href="https://www.linkedin.com/company/cinder-capital/" target="_blank" class=" btn-social btn-linkedin"><i class="fa fa-linkedin"></i></a></span>
                     </div>
                 </div>
             </div>
